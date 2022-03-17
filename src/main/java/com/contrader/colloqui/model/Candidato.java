@@ -3,6 +3,7 @@ package com.contrader.colloqui.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.*;
 import java.util.List;
@@ -10,16 +11,11 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Entity
+@Document("candidati")
 public class Candidato {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     // tutto obbligatorio tranne lista competenze
-    @Column
-    private String nome, cognome,mesiEsperienza,note;
+    private String nome, cognome,mesiEsperienza,note,id;
     //private List<String>listaDiCompetenze;
     private int valutazioneTecnica,valutazioneCaratteriale,autonomia,resilienza,proattività,precisione,commitment,
             valutazioneComplessiva,posizioneInGraduatoria;

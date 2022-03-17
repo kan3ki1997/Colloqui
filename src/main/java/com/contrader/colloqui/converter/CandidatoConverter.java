@@ -9,11 +9,29 @@ public class CandidatoConverter extends AbstractConverter<Candidato, CandidatoDT
 
     @Override
     public Candidato toEntity(CandidatoDTO candidatoDTO) {
-        return null;
+        Candidato candidato = null;
+        if (candidatoDTO!=null){
+            candidato = new Candidato(candidatoDTO.getNome(),candidatoDTO.getCognome(),
+                    candidatoDTO.getMesiEsperienza(),candidatoDTO.getNote(),"",candidatoDTO.getValutazioneTecnica(),
+                    candidatoDTO.getValutazioneCaratteriale(),candidatoDTO.getAutonomia(),candidatoDTO.getResilienza(),
+                    candidatoDTO.getProattività(),candidatoDTO.getPrecisione(),candidatoDTO.getCommitment(),
+                    candidatoDTO.getValutazioneComplessiva(),candidatoDTO.getPosizioneInGraduatoria());
+            return candidato;
+        }
+        return candidato;
     }
 
     @Override
     public CandidatoDTO toDTO(Candidato candidato) {
-        return null;
+        CandidatoDTO candidatoDTO = null;
+        if (candidato!=null){
+            candidatoDTO = new CandidatoDTO(candidato.getNome(),candidato.getCognome(),
+                    candidato.getMesiEsperienza(),candidato.getNote(),"",candidato.getValutazioneTecnica(),
+                    candidato.getValutazioneCaratteriale(),candidato.getAutonomia(),candidato.getResilienza(),
+                    candidato.getProattività(),candidato.getPrecisione(),candidato.getCommitment(),
+                    candidato.getValutazioneComplessiva(),candidato.getPosizioneInGraduatoria());
+            return candidatoDTO;
+        }
+        return candidatoDTO;
     }
 }
