@@ -12,8 +12,8 @@ import java.util.List;
 public class CandidatoDTO {
 
     private String nome, cognome,mesiEsperienza,note,id;
-    //private List<String>listaDiCompetenze;
-    private int valutazioneTecnica,valutazioneCaratteriale,autonomia,resilienza,proattività,precisione,commitment,
-            valutazioneComplessiva,posizioneInGraduatoria;
+    private List<String>listaDiCompetenze;
+    private int valTecnica, valCarattere,autonomia,resilienza,proattivita,precisione,commitment,
+            valComplessiva;
 
 }

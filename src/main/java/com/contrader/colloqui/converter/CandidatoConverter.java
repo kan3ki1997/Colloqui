@@ -11,11 +11,10 @@ public class CandidatoConverter extends AbstractConverter<Candidato, CandidatoDT
     public Candidato toEntity(CandidatoDTO candidatoDTO) {
         Candidato candidato = null;
         if (candidatoDTO!=null){
-            candidato = new Candidato(candidatoDTO.getNome(),candidatoDTO.getCognome(),
-                    candidatoDTO.getMesiEsperienza(),candidatoDTO.getNote(),"",candidatoDTO.getValutazioneTecnica(),
-                    candidatoDTO.getValutazioneCaratteriale(),candidatoDTO.getAutonomia(),candidatoDTO.getResilienza(),
-                    candidatoDTO.getProattività(),candidatoDTO.getPrecisione(),candidatoDTO.getCommitment(),
-                    candidatoDTO.getValutazioneComplessiva(),candidatoDTO.getPosizioneInGraduatoria());
+            candidato = new Candidato(candidatoDTO.getNome(),candidatoDTO.getCognome(),candidatoDTO.getMesiEsperienza(),
+                    candidatoDTO.getNote(),candidatoDTO.getId(),candidatoDTO.getListaDiCompetenze(),candidatoDTO.getValTecnica(),
+                    candidatoDTO.getValCarattere(),candidatoDTO.getAutonomia(),candidatoDTO.getResilienza(),candidatoDTO.getProattivita(),
+                    candidatoDTO.getPrecisione(), candidatoDTO.getCommitment(), candidatoDTO.getValComplessiva());
             return candidato;
         }
         return candidato;
@@ -26,10 +25,10 @@ public class CandidatoConverter extends AbstractConverter<Candidato, CandidatoDT
         CandidatoDTO candidatoDTO = null;
         if (candidato!=null){
             candidatoDTO = new CandidatoDTO(candidato.getNome(),candidato.getCognome(),
-                    candidato.getMesiEsperienza(),candidato.getNote(),"",candidato.getValutazioneTecnica(),
-                    candidato.getValutazioneCaratteriale(),candidato.getAutonomia(),candidato.getResilienza(),
-                    candidato.getProattività(),candidato.getPrecisione(),candidato.getCommitment(),
-                    candidato.getValutazioneComplessiva(),candidato.getPosizioneInGraduatoria());
+                    candidato.getMesiEsperienza(),candidato.getNote(),candidato.get_id(),candidato.getListaDiCompetenze(),
+                    candidato.getValTecnica(), candidato.getValCarattere(),candidato.getAutonomia(),candidato.getResilienza(),
+                    candidato.getProattivita(),candidato.getPrecisione(),candidato.getCommitment(),
+                    candidato.getValComplessiva());
             return candidatoDTO;
         }
         return candidatoDTO;

@@ -11,6 +11,6 @@ import javax.transaction.Transactional;
 @Transactional
 public interface CandidatoDAO extends MongoRepository<Candidato,Long> {
 
-  // CRUD QUERY
+  // QUERY
 
 }

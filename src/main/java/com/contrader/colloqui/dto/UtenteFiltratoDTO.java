@@ -7,6 +7,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class IntervistatoreDTO {
-    private String bla;
+public class UtenteFiltratoDTO {
+
+    private String nomeUtente, cognomeUtente;
+    private int valutazioneComplessiva;
+
 }

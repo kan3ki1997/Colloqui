@@ -3,13 +3,23 @@ package com.contrader.colloqui.converter;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class AbstractConverter<Entity, DTO> implements Converter<Entity, DTO> {
+/**
+ * Questa classe implementa i metodi che convertono le liste.
+ *
+ * @author Vittorio Valent & Girolamo Murdaca
+ *
+ * @param <Entity>
+ * @param <DTO>
+ *
+ * @see Converter
+ */
+public abstract class AbstractConverter<Entity,DTO> implements Converter<Entity,DTO> {
 
-    public List<Entity> toEntityList(List<DTO> listDTO) {
+    public List<Entity> toEntityList (Iterable<DTO> listDTO) {
         List<Entity> list = new ArrayList<Entity>();
 
-        if (listDTO != null) {
-            for (DTO dto : listDTO) {
+        if(listDTO != null) {
+            for (DTO dto:listDTO) {
                 Entity entity = toEntity(dto);
                 list.add(entity);
             }
@@ -17,11 +27,11 @@ public abstract class AbstractConverter<Entity, DTO> implements Converter<Entity
         return list;
     }
 
-    public List<DTO> toDTOList(Iterable<Entity> listEntity) {
+    public List<DTO> toDTOList (Iterable<Entity> listEntity) {
         List<DTO> list = new ArrayList<DTO>();
 
-        if (listEntity != null) {
-            for (Entity entity : listEntity) {
+        if(listEntity != null) {
+            for (Entity entity:listEntity) {
                 DTO dto = toDTO(entity);
                 list.add(dto);
             }

@@ -14,10 +14,18 @@ import java.util.List;
 @Document("candidati")
 public class Candidato {
 
+
+
     // tutto obbligatorio tranne lista competenze
-    private String nome, cognome,mesiEsperienza,note,id;
-    //private List<String>listaDiCompetenze;
-    private int valutazioneTecnica,valutazioneCaratteriale,autonomia,resilienza,proattività,precisione,commitment,
-            valutazioneComplessiva,posizioneInGraduatoria;
+    private String nome, cognome,mesiEsperienza,note;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private String _id;
+
+    private List<String>listaDiCompetenze;
+
+    private int valTecnica, valCarattere,autonomia,resilienza,proattivita,precisione,commitment,
+            valComplessiva;
 
 }
