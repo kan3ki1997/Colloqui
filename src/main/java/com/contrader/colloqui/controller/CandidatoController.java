@@ -6,8 +6,10 @@ import com.contrader.colloqui.dto.UtenteFiltratoDTO;
 import com.contrader.colloqui.service.CandidatoService;
 import com.contrader.colloqui.service.UtenteFiltratoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -29,12 +31,12 @@ public class CandidatoController {
     }
 
     @GetMapping("/mostraGraduatoria")
-    public List<UtenteFiltratoDTO> mostraGraduatoria() {
-        return utenteFiltratoService.sortGraduatoria();
+    public ResponseEntity<List<UtenteFiltratoDTO>> mostraGraduatoria() {
+        return ResponseEntity.ok(utenteFiltratoService.sortGraduatoria());
     }
 
     @PostMapping("/inserisciCandidato")
-    public void inserisciCandidato(@RequestBody CandidatoDTO candidatoDTO) {
+    public void inserisciCandidato(@RequestBody @Valid CandidatoDTO candidatoDTO) {
 
         // imposto la valutazione complessiva (che è in trentesimi): se in quinti * 6 se decimi * 3 diviso totale valutazioni
         List<Integer> valoriCompetenze = (List<Integer>) candidatoDTO.getListaDiCompetenze().values();
@@ -59,22 +61,5 @@ public class CandidatoController {
         // inserisco l'utente filtrato nella graduatoria e la aggiorno in maniera decrescente
         utenteFiltratoService.inserisci(utenteFiltratoDTO);
 
-    }
-
-    public boolean convalidaDati(CandidatoDTO candidatoDTO) {
-        // convalida decimi
-        if (candidatoDTO.getValTecnica() > 10 || candidatoDTO.getValCarattere() > 10 || candidatoDTO.getAutonomia() > 10 || candidatoDTO.getResilienza() > 10)
-            return false;
-
-        // convalida quinti
-        if (candidatoDTO.getProattivita() > 5 || candidatoDTO.getPrecisione() > 5 && candidatoDTO.getCommitment() > 5)
-            return false;
-
-        // convalida decimi competenze
-        for (int i = 0; i < candidatoDTO.getListaDiCompetenze().size(); i++) {
-            if (candidatoDTO.getListaDiCompetenze().get(i) > 10) return false;
-        }
-
-        return false;
     }
 }
