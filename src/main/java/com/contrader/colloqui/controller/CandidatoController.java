@@ -37,9 +37,15 @@ public class CandidatoController {
     public void inserisciCandidato(@RequestBody CandidatoDTO candidatoDTO) {
 
         // imposto la valutazione complessiva (che è in trentesimi): se in quinti * 6 se decimi * 3 diviso totale valutazioni
+        List<Integer> valoriCompetenze = (List<Integer>) candidatoDTO.getListaDiCompetenze().values();
+        int sumOfValues = 0;
+        for (int i = 0; i < valoriCompetenze.size(); i++) {
+            sumOfValues += valoriCompetenze.get(i);
+        }
+
         int valutazioneComplessiva = ((candidatoDTO.getValTecnica() * 3) + (candidatoDTO.getValCarattere() * 3) +
                 (candidatoDTO.getAutonomia() * 3) + (candidatoDTO.getResilienza() * 3) + (candidatoDTO.getProattivita() * 6) +
-                (candidatoDTO.getPrecisione() * 6) + (candidatoDTO.getCommitment() * 6)) / 7;
+                (candidatoDTO.getPrecisione() * 6) + (candidatoDTO.getCommitment() * 6) + (sumOfValues) * 3) / (7 + valoriCompetenze.size());
 
         candidatoDTO.setValComplessiva(valutazioneComplessiva);
         candidatoService.insert(candidatoDTO);

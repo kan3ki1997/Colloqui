@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 import javax.persistence.*;
+import java.util.HashMap;
 import java.util.List;
 
 @AllArgsConstructor
@@ -20,7 +21,7 @@ public class Candidato {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String _id;
 
-    private List<String>listaDiCompetenze;
+    private HashMap<String, Integer> listaDiCompetenze;
 
     private int valTecnica, valCarattere,autonomia,resilienza,proattivita,precisione,commitment,
             valComplessiva;

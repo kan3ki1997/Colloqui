@@ -12,7 +12,7 @@ public class IntervistatoreController {
     @Autowired
     private IntervistatoreService intervistatoreService;
 
-    @GetMapping("/login")
+    @PostMapping("/login")
     public boolean doLogin(@RequestBody IntervistatoreDTO intervistatoreDTO) {
         if (intervistatoreService.doLogin(intervistatoreDTO.getUsername(), intervistatoreDTO.getPassword()) != null) {
             return true;
