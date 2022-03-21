@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -13,8 +12,6 @@ import java.util.List;
 @Data
 @Document("candidati")
 public class Candidato {
-
-
 
     // tutto obbligatorio tranne lista competenze
     private String nome, cognome,mesiEsperienza,note;

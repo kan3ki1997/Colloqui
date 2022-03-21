@@ -23,12 +23,12 @@ public class CandidatoController {
     @Autowired
     private UtenteFiltratoService utenteFiltratoService;
 
-    @GetMapping(value = "/mostra_candidati")
+    @GetMapping("/mostra_candidati") // tolto "value ="
     public List<CandidatoDTO> mostraCandidati() {
         return candidatoService.getAllUsers();
     }
 
-    @GetMapping(value = "/mostraGraduatoria")
+    @GetMapping("/mostraGraduatoria")
     public List<UtenteFiltratoDTO> mostraGraduatoria() {
         return utenteFiltratoService.sortGraduatoria();
     }
@@ -36,7 +36,7 @@ public class CandidatoController {
     @PostMapping("/inserisciCandidato")
     public void inserisciCandidato(@RequestBody CandidatoDTO candidatoDTO) {
 
-        // imposto la valutazione complessiva (in trentesimi): se in quinti * 6 se decimi * 3 diviso totale valutazioni
+        // imposto la valutazione complessiva (che è in trentesimi): se in quinti * 6 se decimi * 3 diviso totale valutazioni
         int valutazioneComplessiva = ((candidatoDTO.getValTecnica() * 3) + (candidatoDTO.getValCarattere() * 3) +
                 (candidatoDTO.getAutonomia() * 3) + (candidatoDTO.getResilienza() * 3) + (candidatoDTO.getProattivita() * 6) +
                 (candidatoDTO.getPrecisione() * 6) + (candidatoDTO.getCommitment() * 6)) / 7;
@@ -45,13 +45,13 @@ public class CandidatoController {
         candidatoService.insert(candidatoDTO);
 
         // passo i dati necessari alla graduatoria impostati nell'utente filtrato
-        UtenteFiltratoDTO utenteFiltrato = new UtenteFiltratoDTO();
-        utenteFiltrato.setNomeUtente(candidatoDTO.getNome());
-        utenteFiltrato.setCognomeUtente(candidatoDTO.getCognome());
-        utenteFiltrato.setValutazioneComplessiva(candidatoDTO.getValComplessiva());
+        UtenteFiltratoDTO utenteFiltratoDTO = new UtenteFiltratoDTO();
+        utenteFiltratoDTO.setNomeUtente(candidatoDTO.getNome());
+        utenteFiltratoDTO.setCognomeUtente(candidatoDTO.getCognome());
+        utenteFiltratoDTO.setValutazioneComplessiva(candidatoDTO.getValComplessiva());
 
-        utenteFiltratoService.inserisci(utenteFiltrato);
-        // inserisco l'utente filtrato nella graduatoria e la aggiorno
+        // inserisco l'utente filtrato nella graduatoria e la aggiorno in maniera decrescente
+        utenteFiltratoService.inserisci(utenteFiltratoDTO);
 
     }
 }
