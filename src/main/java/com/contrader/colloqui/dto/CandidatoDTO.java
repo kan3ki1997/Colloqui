@@ -14,8 +14,6 @@ import java.util.List;
 @Data
 public class CandidatoDTO {
 
-    @NotNull
-    private HashMap<String, Integer> listaDiCompetenze;
 
     @NotNull
     private String nome, cognome,mesiEsperienza,note,id;
@@ -23,6 +21,9 @@ public class CandidatoDTO {
     @NotNull
     @Max(10)
     private int valTecnica, valCarattere,autonomia,resilienza;
+
+    @NotNull
+    private HashMap<String, Integer> listaDiCompetenze;
 
     @NotNull
     @Max(5)
