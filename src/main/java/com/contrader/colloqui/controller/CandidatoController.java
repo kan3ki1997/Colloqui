@@ -60,4 +60,21 @@ public class CandidatoController {
         utenteFiltratoService.inserisci(utenteFiltratoDTO);
 
     }
+
+    public boolean convalidaDati(CandidatoDTO candidatoDTO) {
+        // convalida decimi
+        if (candidatoDTO.getValTecnica() > 10 || candidatoDTO.getValCarattere() > 10 || candidatoDTO.getAutonomia() > 10 || candidatoDTO.getResilienza() > 10)
+            return false;
+
+        // convalida quinti
+        if (candidatoDTO.getProattivita() > 5 || candidatoDTO.getPrecisione() > 5 && candidatoDTO.getCommitment() > 5)
+            return false;
+
+        // convalida decimi competenze
+        for (int i = 0; i < candidatoDTO.getListaDiCompetenze().size(); i++) {
+            if (candidatoDTO.getListaDiCompetenze().get(i) > 10) return false;
+        }
+
+        return false;
+    }
 }
