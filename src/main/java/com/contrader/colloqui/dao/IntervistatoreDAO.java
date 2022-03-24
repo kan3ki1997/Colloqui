@@ -11,6 +11,5 @@ import javax.transaction.Transactional;
 @Transactional
 public interface IntervistatoreDAO extends MongoRepository<Intervistatore, Long> {
 
-    @Query("{username : ?0, password : ?1}")
-    Intervistatore findUserByUsernameAndPassword(String username, String password);
+    Intervistatore findByUsernameAndPassword(String username, String password);
 }
