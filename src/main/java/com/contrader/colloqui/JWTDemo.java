@@ -10,58 +10,47 @@ import io.jsonwebtoken.Claims;
 
 public class JWTDemo {
 
-    // The secret key. This should be in a property file NOT under source
-    // control and not hard coded in real life. We're putting it here for
-    // simplicity.
+    // La chiave segreta è consigliabile metterla in un file a parte e non nel codice sorgente
+    // è stato messo qui per semplicità
     private static String SECRET_KEY = "Bearer oeRaYY7Wo24sDqKSX3IM9ASGmdGPmkTd9jo1QTy4b7P9Ze5_9hKolVX8xNrQDcNRfVEdTZNOuOyqEGhXEbdJI-ZQ19k_o9MI0y3eZN2lp9jow55FfXMiINEdt1XR85VipRLSOkT6kSpzs2x-jbLDiz9iFVzkd81YKxMgPA7VfZeQUm4n-mOmnWMaVX30zGFU4L3oPBctYKkl4dYfqYWqRNfrgPJVi5DGFjywgxx0ASEiJHtV72paI3fDR2XwlSkyhhmY-ICjCRmsJN4fX1pdoL8a18-aQrvyu4j0Os6dVPYIoPvvY0SAZtWYKHfM15g7A3HD4cVREf9cUsprCRK93w";
-    private static int ttlMillis = 60000;
-    private static String issuer = "JWT Builder";
+    private static int ttlMillis = 600000; // 1 minuto -0
+    private static String issuer = "JWT Builder"; // FORSE OPZIONALE!
 
+    public static String createJWT(String id, String subject) {
 
-    //Sample method to construct a JWT
-    public static String createJWT(Long id, String subject) {
-
-        //The JWT signature algorithm we will be using to sign the token
+        // L'algoritmo per criptare il token
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
 
         long nowMillis = System.currentTimeMillis();
-        Date now = new Date(nowMillis);
+        Date now = new Date(nowMillis); // inizio sessione es. 10:09
 
-        //We will sign our JWT with our ApiKey secret
-        byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary(SECRET_KEY);
-        Key signingKey = new SecretKeySpec(apiKeySecretBytes, signatureAlgorithm.getJcaName());
-
-        //Let's set the JWT Claims
-        JwtBuilder builder = Jwts.builder().setId(String.valueOf(id))
+        // Settiamo le JWT Claims
+        JwtBuilder builder = Jwts.builder().setId(id)
                 .setIssuedAt(now)
                 .setSubject(subject)
-                .setIssuer(issuer)
-                .signWith(signatureAlgorithm, signingKey);
+                .setIssuer(issuer) // FORSE OPZIONALE!
+                .signWith(signatureAlgorithm,SECRET_KEY); // Criptiamo il JWT
 
-        //if it has been specified, let's add the expiration
-
+        // Se il tempo per la scadenza impostato è inferiore a 0 la sessione non scadrà mai
         if (ttlMillis >= 0) {
-            long expMillis = nowMillis + ttlMillis;
+            long expMillis = nowMillis + ttlMillis; // settiamo la scadenza es : 10:09 + 5 minuti | scadenza sessione = 10:14
             Date exp = new Date(expMillis);
             builder.setExpiration(exp);
         }
 
-        //Builds the JWT and serializes it to a compact, URL-safe string
+        // Compila il JWT e lo serializza in una stringa compatta e sicura per gli URL
         return builder.compact();
     }
 
-
     public static Claims decodeJWT(String jwt) {
 
-        //This line will throw an exception if it is not a signed JWS (as expected)
+        // Genera un eccezione se il JWT è scaduto
         Claims claims = Jwts.parser()
-                .setSigningKey(DatatypeConverter.parseBase64Binary(SECRET_KEY))
-                .parseClaimsJws(jwt).getBody();
+                .setSigningKey(SECRET_KEY)
+                .parseClaimsJws(jwt).getBody(); // nel body mettiamo solo i dati non sensibi come user ID o username ecc.
 
         return claims;
 
     }
-
-
 
 }

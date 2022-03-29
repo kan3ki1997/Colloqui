@@ -1,10 +1,14 @@
 package com.contrader.colloqui.controller;
 
+import com.contrader.colloqui.JWTDemo;
 import com.contrader.colloqui.dao.CandidatoDAO;
 import com.contrader.colloqui.dto.CandidatoDTO;
+import com.contrader.colloqui.dto.IntervistatoreDTO;
 import com.contrader.colloqui.dto.UtenteFiltratoDTO;
 import com.contrader.colloqui.service.CandidatoService;
+import com.contrader.colloqui.service.IntervistatoreService;
 import com.contrader.colloqui.service.UtenteFiltratoService;
+import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,23 +24,42 @@ public class CandidatoController {
     private CandidatoService candidatoService;
 
     @Autowired
+    private IntervistatoreService intervistatoreService;
+
+    @Autowired
     private CandidatoDAO candidatoDAO;
 
     @Autowired
     private UtenteFiltratoService utenteFiltratoService;
 
-    @GetMapping("/mostra_candidati") // tolto "value ="
-    public List<CandidatoDTO> mostraCandidati() {
-        return candidatoService.getAllUsers();
+    @GetMapping("/mostraCandidati")
+    public List<CandidatoDTO> mostraCandidati(@RequestBody String jwt) {
+        try {
+            JWTDemo.decodeJWT(jwt);
+            return candidatoService.getAllUsers();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
     }
 
-    @GetMapping("/mostraGraduatoria")
-    public ResponseEntity<List<UtenteFiltratoDTO>> mostraGraduatoria() {
-        return ResponseEntity.ok(utenteFiltratoService.sortGraduatoria());
+    @PostMapping("/mostraGraduatoria")
+    public ResponseEntity<List<UtenteFiltratoDTO>> mostraGraduatoria(@RequestBody String jwt) {
+        try {
+            Claims claims = JWTDemo.decodeJWT(jwt);
+            IntervistatoreDTO intervistatoreDTO = intervistatoreService.read(claims.getId()); // creo un dto tramite l'id della claim
+            if (claims.getSubject().equals(intervistatoreDTO.getUsername())) {
+                return ResponseEntity.ok(utenteFiltratoService.sortGraduatoria());
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+        return null;
     }
 
     @PostMapping("/inserisciCandidato")
-    public void inserisciCandidato(@RequestBody @Valid CandidatoDTO candidatoDTO) {
+    public void inserisciCandidato(@RequestBody @Valid CandidatoDTO candidatoDTO, @RequestParam String jwt) {
 
         // imposto la valutazione complessiva (che è in trentesimi): se in quinti * 6 se decimi * 3 diviso totale valutazioni
         List<Integer> valoriCompetenze = (List<Integer>) candidatoDTO.getListaDiCompetenze().values();

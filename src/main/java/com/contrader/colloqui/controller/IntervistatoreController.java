@@ -1,5 +1,6 @@
 package com.contrader.colloqui.controller;
 
+import com.contrader.colloqui.JWTDemo;
 import com.contrader.colloqui.dto.IntervistatoreDTO;
 import com.contrader.colloqui.service.IntervistatoreService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,16 +14,18 @@ public class IntervistatoreController {
     private IntervistatoreService intervistatoreService;
 
     @PostMapping("/login")
-    public boolean doLogin(@RequestBody IntervistatoreDTO intervistatoreDTO) {
+    public String doLogin(@RequestBody IntervistatoreDTO intervistatoreDTO) {
+
         if (intervistatoreService.doLogin(intervistatoreDTO.getUsername(), intervistatoreDTO.getPassword()) != null) {
-            return true;
+            String jwt = JWTDemo.createJWT(intervistatoreDTO.getId(),intervistatoreDTO.getUsername());
+            return jwt;
         }
 
-        return false;
+        return "Dati errati";
     }
 
     @PostMapping("/insert")
-    public void insert(@RequestBody IntervistatoreDTO intervistatoreDTO){
+    public void insert(@RequestBody IntervistatoreDTO intervistatoreDTO) {
         intervistatoreService.insert(intervistatoreDTO);
     }
 }
