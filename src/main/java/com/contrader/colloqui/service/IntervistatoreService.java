@@ -16,7 +16,7 @@ public class IntervistatoreService extends AbstractService<Intervistatore, Inter
         return intervistatoreDAO.findByUsernameAndPassword(username, password);
     }
 
-    public IntervistatoreDTO read(String id){
+    public IntervistatoreDTO getUser(String id){
         return intervistatoreDAO.findById(id);
     }
 }

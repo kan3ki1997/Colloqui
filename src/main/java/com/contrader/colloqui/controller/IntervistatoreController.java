@@ -17,7 +17,10 @@ public class IntervistatoreController {
     public String doLogin(@RequestBody IntervistatoreDTO intervistatoreDTO) {
 
         if (intervistatoreService.doLogin(intervistatoreDTO.getUsername(), intervistatoreDTO.getPassword()) != null) {
-            String jwt = JWTDemo.createJWT(intervistatoreDTO.getId(),intervistatoreDTO.getUsername());
+            String jwt = JWTDemo.createJWT(intervistatoreDTO.getId(), intervistatoreDTO.getUsername());
+
+            // TEST
+            System.out.println(intervistatoreDTO.toString());
             return jwt;
         }
 
