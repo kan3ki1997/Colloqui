@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class UtenteFiltratoDTO {
 
+    private Long id;
     private String nomeUtente, cognomeUtente;
     private int valutazioneComplessiva;
 

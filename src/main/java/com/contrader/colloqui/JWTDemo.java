@@ -1,12 +1,11 @@
 package com.contrader.colloqui;
 
-import javax.crypto.spec.SecretKeySpec;
-import javax.xml.bind.DatatypeConverter;
-import java.security.Key;
-import io.jsonwebtoken.*;
-import java.util.Date;
-import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtBuilder;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+
+import java.util.Date;
 
 public class JWTDemo {
 
@@ -16,7 +15,7 @@ public class JWTDemo {
     private static int ttlMillis = 600000; // 1 minuto -0
     private static String issuer = "JWT Builder"; // FORSE OPZIONALE!
 
-    public static String createJWT(String id, String subject) {
+    public static String createJWT(Long id, String subject) {
 
         // L'algoritmo per criptare il token
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
@@ -25,7 +24,7 @@ public class JWTDemo {
         Date now = new Date(nowMillis); // inizio sessione es. 10:09
 
         // Settiamo le JWT Claims
-        JwtBuilder builder = Jwts.builder().setId(id)
+        JwtBuilder builder = Jwts.builder().setId(String.valueOf(id))
                 .setIssuedAt(now)
                 .setSubject(subject)
                 .setIssuer(issuer) // FORSE OPZIONALE!

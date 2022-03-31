@@ -3,14 +3,19 @@ package com.contrader.colloqui.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.mongodb.core.mapping.Document;
+import javax.persistence.*;
+import java.io.Serializable;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Document("utenteFiltrato")
-public class UtenteFiltrato {
+@Entity
+public class UtenteFiltrato implements Serializable {
 
+    @Column
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String nomeUtente, cognomeUtente;
     private int valutazioneComplessiva;
 

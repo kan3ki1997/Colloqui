@@ -3,12 +3,11 @@ package com.contrader.colloqui.service;
 import com.contrader.colloqui.converter.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
-public abstract class AbstractService<Entity, DTO> implements ServiceDTO<DTO> {
+@org.springframework.stereotype.Service
+public abstract class AbstractService<Entity, DTO> implements Service<DTO> {
 
     @Autowired
     protected CrudRepository<Entity, Long> crudRepository;

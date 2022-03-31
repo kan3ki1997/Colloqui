@@ -25,7 +25,7 @@ public class CandidatoConverter extends AbstractConverter<Candidato, CandidatoDT
         CandidatoDTO candidatoDTO = null;
         if (candidato!=null){
             candidatoDTO = new CandidatoDTO(candidato.getNome(),candidato.getCognome(),
-                    candidato.getMesiEsperienza(),candidato.getNote(),candidato.get_id(), candidato.getValTecnica(),
+                    candidato.getMesiEsperienza(),candidato.getNote(),candidato.getId(), candidato.getValTecnica(),
                     candidato.getValCarattere(),candidato.getAutonomia(),candidato.getResilienza(), candidato.getListaDiCompetenze(),
                     candidato.getProattivita(),candidato.getPrecisione(),candidato.getCommitment(), candidato.getValComplessiva());
             return candidatoDTO;

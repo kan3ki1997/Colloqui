@@ -17,7 +17,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/Candidato")
+@RequestMapping("/candidato")
 public class CandidatoController {
 
     @Autowired
@@ -43,11 +43,11 @@ public class CandidatoController {
         return null;
     }
 
-    @PostMapping("/mostraGraduatoria")
-    public ResponseEntity<List<UtenteFiltratoDTO>> mostraGraduatoria(@RequestBody String jwt) {
+    @GetMapping("/mostraGraduatoria")
+    public ResponseEntity<List<UtenteFiltratoDTO>> mostraGraduatoria(@RequestParam String jwt) {
         try {
             Claims claims = JWTDemo.decodeJWT(jwt);
-            IntervistatoreDTO intervistatoreDTO = intervistatoreService.read(claims.getId()); // creo un dto tramite l'id della claim
+            IntervistatoreDTO intervistatoreDTO = intervistatoreService.getUser(claims.getId()); // creo un dto tramite l'id della claim
             if (claims.getSubject().equals(intervistatoreDTO.getUsername())) {
                 return ResponseEntity.ok(utenteFiltratoService.sortGraduatoria());
             }

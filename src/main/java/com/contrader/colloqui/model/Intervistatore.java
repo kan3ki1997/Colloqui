@@ -3,16 +3,20 @@ package com.contrader.colloqui.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.mongodb.core.mapping.Document;
+
+import javax.persistence.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Document("intervistatore")
+@Entity
 public class Intervistatore {
 
+    @Column
     private String username;
     private String password;
-    private String id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
 }

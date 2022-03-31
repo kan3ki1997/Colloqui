@@ -11,7 +11,7 @@ public class UtenteFiltratoConverter extends AbstractConverter<UtenteFiltrato, U
     public UtenteFiltrato toEntity(UtenteFiltratoDTO utenteFiltratoDTO) {
         UtenteFiltrato graduatoria = null;
         if (utenteFiltratoDTO!=null){
-            graduatoria = new UtenteFiltrato(utenteFiltratoDTO.getNomeUtente(),utenteFiltratoDTO.getCognomeUtente(),utenteFiltratoDTO.getValutazioneComplessiva());
+            graduatoria = new UtenteFiltrato(utenteFiltratoDTO.getId(),utenteFiltratoDTO.getNomeUtente(),utenteFiltratoDTO.getCognomeUtente(),utenteFiltratoDTO.getValutazioneComplessiva());
             return graduatoria;
         }
         return graduatoria;
@@ -21,7 +21,7 @@ public class UtenteFiltratoConverter extends AbstractConverter<UtenteFiltrato, U
     public UtenteFiltratoDTO toDTO(UtenteFiltrato utenteFiltrato) {
         UtenteFiltratoDTO utenteFiltratoDTO = null;
         if (utenteFiltrato!=null){
-            utenteFiltratoDTO = new UtenteFiltratoDTO(utenteFiltrato.getNomeUtente(),utenteFiltrato.getCognomeUtente(),utenteFiltrato.getValutazioneComplessiva());
+            utenteFiltratoDTO = new UtenteFiltratoDTO(utenteFiltrato.getId(),utenteFiltrato.getNomeUtente(),utenteFiltrato.getCognomeUtente(),utenteFiltrato.getValutazioneComplessiva());
             return utenteFiltratoDTO;
         }
         return utenteFiltratoDTO;

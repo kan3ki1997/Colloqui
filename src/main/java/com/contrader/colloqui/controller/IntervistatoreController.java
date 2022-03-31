@@ -4,7 +4,10 @@ import com.contrader.colloqui.JWTDemo;
 import com.contrader.colloqui.dto.IntervistatoreDTO;
 import com.contrader.colloqui.service.IntervistatoreService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/intervistatore")
@@ -17,7 +20,10 @@ public class IntervistatoreController {
     public String doLogin(@RequestBody IntervistatoreDTO intervistatoreDTO) {
 
         if (intervistatoreService.doLogin(intervistatoreDTO.getUsername(), intervistatoreDTO.getPassword()) != null) {
-            String jwt = JWTDemo.createJWT(intervistatoreDTO.getId(),intervistatoreDTO.getUsername());
+            String jwt = JWTDemo.createJWT(intervistatoreDTO.getId(), intervistatoreDTO.getUsername());
+
+            // TEST
+            System.out.println(intervistatoreDTO.toString());
             return jwt;
         }
 

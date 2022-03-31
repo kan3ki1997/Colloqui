@@ -3,35 +3,39 @@ package com.contrader.colloqui.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.mongodb.core.mapping.Document;
+import lombok.NonNull;
+
 import javax.persistence.*;
+import javax.validation.constraints.Null;
 import java.util.HashMap;
-import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Document("candidati")
+@Entity(name = "candidati")
 public class Candidato {
 
     // tutto obbligatorio tranne lista competenze
-    private String nome, cognome,mesiEsperienza,note;
+    @Column
+    private String nome, cognome, mesiEsperienza, note;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String _id;
+    private Long id;
 
+    @Column
     private HashMap<String, Integer> listaDiCompetenze;
 
-    private int valTecnica, valCarattere,autonomia,resilienza,proattivita,precisione,commitment,
+    @Column
+    private int valTecnica, valCarattere, autonomia, resilienza, proattivita, precisione, commitment,
             valComplessiva;
 
-    public Candidato(String nome, String cognome, String mesiEsperienza, String note, String _id, int valTecnica, int valCarattere, int autonomia, int resilienza, int proattivita, int precisione, int commitment, int valComplessiva) {
+    public Candidato(String nome, String cognome, String mesiEsperienza, String note, Long id, int valTecnica, int valCarattere, int autonomia, int resilienza, int proattivita, int precisione, int commitment, int valComplessiva) {
         this.nome = nome;
         this.cognome = cognome;
         this.mesiEsperienza = mesiEsperienza;
         this.note = note;
-        this._id = _id;
+        this.id = id;
         this.valTecnica = valTecnica;
         this.valCarattere = valCarattere;
         this.autonomia = autonomia;

@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import java.util.HashMap;
-import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -16,7 +15,9 @@ public class CandidatoDTO {
 
 
     @NotNull
-    private String nome, cognome,mesiEsperienza,note,id;
+    @Max(100)
+    private String nome, cognome,mesiEsperienza,note;
+    private Long id;
 
     @NotNull
     @Max(10)
@@ -33,7 +34,7 @@ public class CandidatoDTO {
     @Max(30)
     private  int valComplessiva;
 
-    public CandidatoDTO(String nome, String cognome, String mesiEsperienza, String note, String _id, int valTecnica, int valCarattere, int autonomia, int resilienza, int proattivita, int precisione, int commitment, int valComplessiva) {
+    public CandidatoDTO(String nome, String cognome, String mesiEsperienza, String note, Long _id, int valTecnica, int valCarattere, int autonomia, int resilienza, int proattivita, int precisione, int commitment, int valComplessiva) {
         this.nome = nome;
         this.cognome = cognome;
         this.mesiEsperienza = mesiEsperienza;

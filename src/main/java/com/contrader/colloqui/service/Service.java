@@ -1,0 +1,17 @@
+package com.contrader.colloqui.service;
+
+import java.util.List;
+
+public interface Service<DTO> {
+
+    public List<DTO> getAll();
+
+    public DTO read(long id);
+
+    public DTO insert(DTO dto);
+
+    public DTO update(DTO dto);
+
+    public void delete(long id);
+
+}

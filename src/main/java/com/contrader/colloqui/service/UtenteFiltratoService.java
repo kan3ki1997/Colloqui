@@ -6,6 +6,7 @@ import com.contrader.colloqui.dto.UtenteFiltratoDTO;
 import com.contrader.colloqui.model.UtenteFiltrato;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,7 +21,7 @@ public class UtenteFiltratoService extends AbstractService<UtenteFiltrato, Utent
     private UtenteFiltratoDAO utenteFiltratoDAO;
 
     public void inserisci(UtenteFiltratoDTO utenteFiltratoDTO){
-        utenteFiltratoDAO.insert(converter.toEntity(utenteFiltratoDTO));
+        utenteFiltratoDAO.save(converter.toEntity(utenteFiltratoDTO));
     }
 
     public List<UtenteFiltratoDTO> sortGraduatoria(){
