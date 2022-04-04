@@ -19,6 +19,7 @@ public class IntervistatoreController {
     @PostMapping("/login")
     public String doLogin(@RequestBody IntervistatoreDTO intervistatoreDTO) {
 
+
         if (intervistatoreService.doLogin(intervistatoreDTO.getUsername(), intervistatoreDTO.getPassword()) != null) {
             String jwt = JWTDemo.createJWT(intervistatoreDTO.getId(), intervistatoreDTO.getUsername());
 
@@ -32,6 +33,6 @@ public class IntervistatoreController {
 
     @PostMapping("/insert")
     public void insert(@RequestBody IntervistatoreDTO intervistatoreDTO) {
-        intervistatoreService.insert(intervistatoreDTO);
+//        intervistatoreService.insert(intervistatoreDTO);
     }
 }

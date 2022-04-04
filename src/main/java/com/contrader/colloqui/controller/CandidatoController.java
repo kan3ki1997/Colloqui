@@ -6,6 +6,7 @@ import com.contrader.colloqui.dto.CandidatoDTO;
 import com.contrader.colloqui.dto.IntervistatoreDTO;
 import com.contrader.colloqui.dto.UtenteFiltratoDTO;
 import com.contrader.colloqui.service.CandidatoService;
+
 import com.contrader.colloqui.service.IntervistatoreService;
 import com.contrader.colloqui.service.UtenteFiltratoService;
 import io.jsonwebtoken.Claims;
@@ -61,13 +62,13 @@ public class CandidatoController {
     @PostMapping("/inserisciCandidato")
     public void inserisciCandidato(@RequestBody @Valid CandidatoDTO candidatoDTO, @RequestParam String jwt) {
 
-        // imposto la valutazione complessiva (che è in trentesimi): se in quinti * 6 se decimi * 3 diviso totale valutazioni
         List<Integer> valoriCompetenze = (List<Integer>) candidatoDTO.getListaDiCompetenze().values();
         int sumOfValues = 0;
         for (int i = 0; i < valoriCompetenze.size(); i++) {
             sumOfValues += valoriCompetenze.get(i);
         }
 
+        // imposto la valutazione complessiva (che è in trentesimi): se in quinti * 6 se decimi * 3 diviso totale valutazioni
         int valutazioneComplessiva = ((candidatoDTO.getValTecnica() * 3) + (candidatoDTO.getValCarattere() * 3) +
                 (candidatoDTO.getAutonomia() * 3) + (candidatoDTO.getResilienza() * 3) + (candidatoDTO.getProattivita() * 6) +
                 (candidatoDTO.getPrecisione() * 6) + (candidatoDTO.getCommitment() * 6) + (sumOfValues) * 3) / (7 + valoriCompetenze.size());
