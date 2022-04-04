@@ -33,6 +33,6 @@ public class IntervistatoreController {
 
     @PostMapping("/insert")
     public void insert(@RequestBody IntervistatoreDTO intervistatoreDTO) {
-//        intervistatoreService.insert(intervistatoreDTO);
+        intervistatoreService.insert(intervistatoreDTO);
     }
 }
