@@ -1,18 +1,21 @@
 Da copiare e incollare su postman
 {
-    "nome": "Mario",
-    "cognome": "Bianchi",
-    "mesi esperienza": 15,
-    "note": "Ragazzza intelligente",
+    "nome": "Luigi",
+    "cognome": "Neri",
+    "mesiEsperienza": 6,
+    "note": "Ragazzo intelligente",
     "listaDiCompetenze": {
-		"Java":8,
-		"SQL": 7
-	},
-     "valTecnica": 0,
-     "valCarattere" : 9,
-     "autonomia": 4,
-     "resilienza": 2,
-     "proattivita":1,
-     "precisione":2,
-     "commitment":1
+        "Java": 8,
+        "SQL": 7,
+        "HTML": 5,
+        "CSS": 7,
+        "Javascript": 7
+    },
+    "valTecnica": 7,
+    "valCarattere": 8,
+    "autonomia": 2,
+    "resilienza": 3,
+    "proattivita": 2,
+    "precisione": 2,
+    "commitment": 4
 }

@@ -15,13 +15,14 @@ import java.util.HashMap;
 @Entity(name = "candidati")
 public class Candidato {
 
-    // tutto obbligatorio tranne lista competenze
-    @Column
-    private String nome, cognome, mesiEsperienza, note;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    // tutto obbligatorio tranne lista competenze
+    @Column
+    private String nome, cognome, mesiEsperienza, note;
 
     @Column
     private HashMap<String, Integer> listaDiCompetenze;

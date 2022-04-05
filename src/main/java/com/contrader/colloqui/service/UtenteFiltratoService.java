@@ -29,10 +29,8 @@ public class UtenteFiltratoService extends AbstractService<UtenteFiltrato,Utente
 
         // con i DAO prendo i candidati, li converto in dto e con gli stream li ordino in modo decrescente (sulla val complessiva),
         // infine li salvo in "sortedList" e restituisco la lista
-        List<UtenteFiltratoDTO> sortedList = (List<UtenteFiltratoDTO>) utenteFiltratoMapStruct.toDTOList(utenteFiltratoDAO.findAll()).stream()
+        return utenteFiltratoMapStruct.toDTOList(utenteFiltratoDAO.findAll()).stream()
                 .sorted(Comparator.comparing(UtenteFiltratoDTO::getValutazioneComplessiva).reversed())
                 .collect(Collectors.toList());
-
-        return sortedList;
     }
 }

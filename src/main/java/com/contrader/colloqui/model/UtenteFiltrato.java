@@ -10,12 +10,13 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Data
 @Entity
-public class UtenteFiltrato implements Serializable {
+public class UtenteFiltrato{
 
-    @Column
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column
     private String nomeUtente, cognomeUtente;
     private int valutazioneComplessiva;
 

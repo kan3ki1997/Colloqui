@@ -16,11 +16,11 @@ public class IntervistatoreService extends AbstractService<Intervistatore,Interv
     @Autowired
     private IntervistatoreMapStruct intervistatoreMapStruct;
 
-    public Intervistatore doLogin(String username, String password) {
-        return intervistatoreDAO.findByUsernameAndPassword(username, password);
+    public IntervistatoreDTO getByUsernameAndPassword(String username, String password) {
+        return intervistatoreMapStruct.toDTO(intervistatoreDAO.findByUsernameAndPassword(username, password));
     }
 
-    public IntervistatoreDTO getUser(String id){
-        return intervistatoreDAO.findById(id);
+    public IntervistatoreDTO getUser(Long id){
+        return intervistatoreMapStruct.toDTO(intervistatoreDAO.findById(id.longValue()));
     }
 }

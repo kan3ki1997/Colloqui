@@ -13,18 +13,17 @@ import java.util.HashMap;
 @Data
 public class CandidatoDTO {
 
+    private Long id;
 
     @NotNull
-    @Max(100)
     private String nome, cognome,mesiEsperienza,note;
-    private Long id;
+
+        @NotNull
+    private HashMap<String, Integer> listaDiCompetenze;
 
     @NotNull
     @Max(10)
     private int valTecnica, valCarattere,autonomia,resilienza;
-
-    @NotNull
-    private HashMap<String, Integer> listaDiCompetenze;
 
     @NotNull
     @Max(5)
@@ -34,12 +33,12 @@ public class CandidatoDTO {
     @Max(30)
     private  int valComplessiva;
 
-    public CandidatoDTO(String nome, String cognome, String mesiEsperienza, String note, Long _id, int valTecnica, int valCarattere, int autonomia, int resilienza, int proattivita, int precisione, int commitment, int valComplessiva) {
+    public CandidatoDTO(String nome, String cognome, String mesiEsperienza, String note, Long id, int valTecnica, int valCarattere, int autonomia, int resilienza, int proattivita, int precisione, int commitment, int valComplessiva) {
         this.nome = nome;
         this.cognome = cognome;
         this.mesiEsperienza = mesiEsperienza;
         this.note = note;
-        this.id = _id;
+        this.id = id;
         this.valTecnica = valTecnica;
         this.valCarattere = valCarattere;
         this.autonomia = autonomia;

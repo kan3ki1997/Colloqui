@@ -13,5 +13,5 @@ public interface IntervistatoreDAO extends CrudRepository<Intervistatore, Long> 
 
     Intervistatore findByUsernameAndPassword(String username, String password);
 
-    IntervistatoreDTO findById(String id);
+    Intervistatore findById(long id);
 }

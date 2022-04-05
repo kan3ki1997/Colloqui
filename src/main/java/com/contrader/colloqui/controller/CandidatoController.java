@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -34,9 +35,9 @@ public class CandidatoController {
     private UtenteFiltratoService utenteFiltratoService;
 
     @GetMapping("/mostraCandidati")
-    public List<CandidatoDTO> mostraCandidati(@RequestBody String jwt) {
+    public List<CandidatoDTO> mostraCandidati(@RequestParam String jwt) {
         try {
-            JWTDemo.decodeJWT(jwt);
+            Claims claims = JWTDemo.decodeJWT(jwt);
             return candidatoService.getAllUsers();
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -48,21 +49,22 @@ public class CandidatoController {
     public ResponseEntity<List<UtenteFiltratoDTO>> mostraGraduatoria(@RequestParam String jwt) {
         try {
             Claims claims = JWTDemo.decodeJWT(jwt);
-            IntervistatoreDTO intervistatoreDTO = intervistatoreService.getUser(claims.getId()); // creo un dto tramite l'id della claim
-            if (claims.getSubject().equals(intervistatoreDTO.getUsername())) {
+            IntervistatoreDTO intervistatoreDTO = intervistatoreService.getUser(Long.valueOf(claims.getId())); // creo un dto tramite l'id della claim
+
+            if (claims.getSubject().equals(intervistatoreDTO.getUsername())) { // controllo che l'utente che fa la richiesta sia uguale a quello che ha creato il jwt
                 return ResponseEntity.ok(utenteFiltratoService.sortGraduatoria());
             }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return null;
-        }
+        } catch (Exception e){
+                System.out.println(e.getMessage());
+                return null;
+            }
         return null;
     }
 
     @PostMapping("/inserisciCandidato")
-    public void inserisciCandidato(@RequestBody @Valid CandidatoDTO candidatoDTO, @RequestParam String jwt) {
+    public void inserisciCandidato(@RequestBody @Valid CandidatoDTO candidatoDTO) {
 
-        List<Integer> valoriCompetenze = (List<Integer>) candidatoDTO.getListaDiCompetenze().values();
+        List<Integer> valoriCompetenze = new ArrayList<>(candidatoDTO.getListaDiCompetenze().values());
         int sumOfValues = 0;
         for (int i = 0; i < valoriCompetenze.size(); i++) {
             sumOfValues += valoriCompetenze.get(i);
@@ -80,7 +82,7 @@ public class CandidatoController {
         UtenteFiltratoDTO utenteFiltratoDTO = new UtenteFiltratoDTO();
         utenteFiltratoDTO.setNomeUtente(candidatoDTO.getNome());
         utenteFiltratoDTO.setCognomeUtente(candidatoDTO.getCognome());
-        utenteFiltratoDTO.setValutazioneComplessiva(candidatoDTO.getValComplessiva());
+        utenteFiltratoDTO.setValutazioneComplessiva(valutazioneComplessiva);
 
         // inserisco l'utente filtrato nella graduatoria e la aggiorno in maniera decrescente
         utenteFiltratoService.inserisci(utenteFiltratoDTO);
