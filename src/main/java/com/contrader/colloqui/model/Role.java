@@ -6,18 +6,15 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Entity
-public class UtenteFiltrato{
-
+public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column
-    private String nomeUtente, cognomeUtente;
-    private int valutazioneComplessiva;
-
+    private String nome;
 }

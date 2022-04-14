@@ -3,10 +3,8 @@ package com.contrader.colloqui.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 
 import javax.persistence.*;
-import javax.validation.constraints.Null;
 import java.util.HashMap;
 
 @AllArgsConstructor
@@ -21,13 +19,13 @@ public class Candidato {
     private Long id;
 
     // tutto obbligatorio tranne lista competenze
-    @Column
+    @Column(nullable = false)
     private String nome, cognome, mesiEsperienza, note;
 
-    @Column
+    @Column(nullable = false)
     private HashMap<String, Integer> listaDiCompetenze;
 
-    @Column
+    @Column(nullable = false)
     private int valTecnica, valCarattere, autonomia, resilienza, proattivita, precisione, commitment,
             valComplessiva;
 

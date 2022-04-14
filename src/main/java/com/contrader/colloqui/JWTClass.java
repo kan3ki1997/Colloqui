@@ -7,7 +7,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 
 import java.util.Date;
 
-public class JWTDemo {
+public class JWTClass {
 
     // La chiave segreta è consigliabile metterla in un file a parte e non nel codice sorgente
     // è stato messo qui per semplicità

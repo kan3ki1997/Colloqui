@@ -1,15 +1,11 @@
 package com.contrader.colloqui.controller;
 
-import com.contrader.colloqui.JWTDemo;
 import com.contrader.colloqui.dao.CandidatoDAO;
 import com.contrader.colloqui.dto.CandidatoDTO;
-import com.contrader.colloqui.dto.IntervistatoreDTO;
 import com.contrader.colloqui.dto.UtenteFiltratoDTO;
 import com.contrader.colloqui.service.CandidatoService;
-
 import com.contrader.colloqui.service.IntervistatoreService;
 import com.contrader.colloqui.service.UtenteFiltratoService;
-import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,30 +31,13 @@ public class CandidatoController {
     private UtenteFiltratoService utenteFiltratoService;
 
     @GetMapping("/mostraCandidati")
-    public List<CandidatoDTO> mostraCandidati(@RequestParam String jwt) {
-        try {
-            Claims claims = JWTDemo.decodeJWT(jwt);
-            return candidatoService.getAllUsers();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        return null;
+    public List<CandidatoDTO> mostraCandidati() {
+        return candidatoService.getAllUsers();
     }
 
     @GetMapping("/mostraGraduatoria")
-    public ResponseEntity<List<UtenteFiltratoDTO>> mostraGraduatoria(@RequestParam String jwt) {
-        try {
-            Claims claims = JWTDemo.decodeJWT(jwt);
-            IntervistatoreDTO intervistatoreDTO = intervistatoreService.getUser(Long.valueOf(claims.getId())); // creo un dto tramite l'id della claim
-
-            if (claims.getSubject().equals(intervistatoreDTO.getUsername())) { // controllo che l'utente che fa la richiesta sia uguale a quello che ha creato il jwt
-                return ResponseEntity.ok(utenteFiltratoService.sortGraduatoria());
-            }
-        } catch (Exception e){
-                System.out.println(e.getMessage());
-                return null;
-            }
-        return null;
+    public ResponseEntity<List<UtenteFiltratoDTO>> mostraGraduatoria() {
+        return ResponseEntity.ok(utenteFiltratoService.sortGraduatoria());
     }
 
     @PostMapping("/inserisciCandidato")
@@ -86,6 +65,7 @@ public class CandidatoController {
 
         // inserisco l'utente filtrato nella graduatoria e la aggiorno in maniera decrescente
         utenteFiltratoService.inserisci(utenteFiltratoDTO);
-
     }
+
 }
+

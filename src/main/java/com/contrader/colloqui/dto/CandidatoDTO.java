@@ -18,7 +18,7 @@ public class CandidatoDTO {
     @NotNull
     private String nome, cognome,mesiEsperienza,note;
 
-        @NotNull
+    @NotNull
     private HashMap<String, Integer> listaDiCompetenze;
 
     @NotNull

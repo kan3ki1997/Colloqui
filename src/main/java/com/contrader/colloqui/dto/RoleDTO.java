@@ -6,10 +6,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class IntervistatoreDTO {
+public class RoleDTO {
 
     private Long id;
-    private String username, password;
-    private RoleDTO role;
-    private Boolean enabled;
+    private String nome;
 }
